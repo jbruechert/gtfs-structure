@@ -187,6 +187,7 @@ impl RawGtfsReader {
             feed_info: self.read_objs_from_optional_path(p, "feed_info.txt"),
             read_duration: start_of_read_instant.elapsed(),
             translations: self.read_objs_from_optional_path(p, "translations.txt"),
+            attributions: self.read_objs_from_optional_path(p, "attributions.txt"),
             files,
             source_format: crate::SourceFormat::Directory,
             sha256: None,
@@ -330,6 +331,7 @@ impl RawGtfsReader {
                 Some(Ok(Vec::new()))
             },
             translations: self.read_optional_file(&file_mapping, &mut archive, "translations.txt"),
+            attributions: self.read_optional_file(&file_mapping, &mut archive, "attributions.txt"),
             read_duration: start_of_read_instant.elapsed(),
             files,
             source_format: crate::SourceFormat::Zip,

@@ -49,6 +49,8 @@ pub struct Gtfs {
     pub rider_categories: HashMap<String, RiderCategory>,
     /// All feed information. There is no identifier
     pub feed_info: Vec<FeedInfo>,
+    /// Attributions applied to the dataset
+    pub attributions: Vec<Attribution>
 }
 
 impl TryFrom<RawGtfs> for Gtfs {
@@ -93,6 +95,7 @@ impl TryFrom<RawGtfs> for Gtfs {
             calendar_dates: to_calendar_dates(
                 raw.calendar_dates.unwrap_or_else(|| Ok(Vec::new()))?,
             ),
+            attributions: raw.attributions.unwrap_or_else(|| Ok(Vec::new()))?,
             read_duration: raw.read_duration + start.elapsed(),
         })
     }

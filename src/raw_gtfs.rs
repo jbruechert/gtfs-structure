@@ -54,6 +54,8 @@ pub struct RawGtfs {
     pub sha256: Option<String>,
     /// All translations, None if the file was absent as it is not mandatory
     pub translations: Option<Result<Vec<RawTranslation>, Error>>,
+    /// Attributions applied to the dataset
+    pub attributions: Option<Result<Vec<Attribution>, Error>>
 }
 
 impl RawGtfs {

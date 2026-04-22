@@ -971,6 +971,52 @@ impl From<RawPathway> for Pathway {
     }
 }
 
+/// attributions applied to the dataset
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+pub struct Attribution {
+    /// Identifies an attribution for the dataset or a subset of it
+    #[serde(rename = "attribution_id")]
+    pub id: Option<String>,
+    /// Agency to which the attribution applies
+    pub agency_id: Option<String>,
+    /// Route to which the attribution applies
+    pub route_id: Option<String>,
+    /// Trip to which the attribution applies
+    pub trip_id: Option<String>,
+    /// Name of the attributed organization
+    pub organization_name: String,
+    /// Whether the organization is the producer
+    #[serde(
+        deserialize_with = "deserialize_bool",
+        serialize_with = "serialize_bool"
+    )]
+    pub is_producer: bool,
+    /// Whether the organization is the operator
+    #[serde(
+        deserialize_with = "deserialize_bool",
+        serialize_with = "serialize_bool"
+    )]
+    pub is_operator: bool,
+    /// Whether the organization a public transport authority
+    #[serde(
+        deserialize_with = "deserialize_bool",
+        serialize_with = "serialize_bool"
+    )]
+    pub is_authority: bool,
+    /// URL of the organization
+    pub attribution_url: Option<String>,
+    /// Email of the organization
+    pub attribution_email: Option<String>,
+    /// Phone number of the organization
+    pub attribution_phone: Option<String>,
+}
+
+impl Type for Attribution {
+    fn object_type(&self) -> ObjectType {
+        ObjectType::Attribution
+    }
+}
+
 /// Format of the data
 #[derive(Clone, Debug, Serialize, PartialEq)]
 pub enum SourceFormat {

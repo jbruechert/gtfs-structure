@@ -20,6 +20,8 @@ pub enum ObjectType {
     Fare,
     /// [Pathway] <https://gtfs.org/schedule/reference/#pathwaystxt>
     Pathway,
+    /// [Attribution] <https://gtfs.org/documentation/schedule/reference/#attributionstxt>
+    Attribution,
 }
 
 /// Describes the kind of [Stop]. See <https://gtfs.org/reference/static/#stopstxt> `location_type`
