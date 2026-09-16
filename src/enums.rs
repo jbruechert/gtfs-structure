@@ -849,3 +849,25 @@ pub enum TicketingType {
     #[serde(rename = "1")]
     Unavailable,
 }
+
+/// Describes when a string should be displayed
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum DisplayType {
+    /// The string must always be displayed. It is necessary to identify the transport. This string would be displayed on a physical departure board.
+    ///
+    /// Examples:
+    /// * `IC 67`
+    /// * `RE5`
+    Always = 1,
+    /// The string should be displayed if there is enough space, but the transport can usually be identified without it. This string might be displayed on some physical departure boards.
+    ///
+    /// Examples:
+    /// * `Kyiv Express` - route names used by PKP Intercity
+    /// * `2342` - Numbers identifying a specific trip on a route where tickets is not bound to a specific train, like German regional trains.
+    Optional = 2,
+    /// The string is a detail that is not usually used to identify the transport. It is not usally displayed on departure boards, but might occur in route maps or official route documentation.
+    ///
+    /// Examples:
+    /// - `29` - German ICE route number. Only used on route maps but not used in apps, departure boards etc.
+    Detail = 3,
+}
