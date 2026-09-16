@@ -326,9 +326,19 @@ pub struct Route {
     /// Short name of a route. This will often be a short, abstract identifier like "32", "100X", or "Green" that riders use to identify a route, but which doesn't give any indication of what places the route serves
     #[serde(rename = "route_short_name", default)]
     pub short_name: Option<String>,
+    /// Indicates when `route_short_name` should be displayed.
+    /// If multiple of `trip_short_name`, `route_short_name`, `route_long_name` are optional, apps may pick a string purely based on space constraints.
+    /// If left empty, apps should display it.
+    #[serde(rename = "route_short_name_display")]
+    pub short_name_display: Option<DisplayType>,
     /// Full name of a route. This name is generally more descriptive than the [Route::short_name]] and often includes the route's destination or stop
     #[serde(rename = "route_long_name", default)]
     pub long_name: Option<String>,
+    /// Indicates when `route_long_name` should be displayed.
+    /// If multiple of `trip_short_name`, `route_short_name`, `route_long_name` are optional, apps may pick a string purely based on space constraints.
+    /// If left empty, apps should not display it.
+    #[serde(rename = "route_long_name_display")]
+    pub long_name_display: Option<DisplayType>,
     /// Description of a route that provides useful, quality information
     #[serde(rename = "route_desc")]
     pub desc: Option<String>,
@@ -442,6 +452,10 @@ pub struct RawTrip {
     pub trip_headsign: Option<String>,
     /// Public facing text used to identify the trip to riders, for instance, to identify train numbers for commuter rail trips
     pub trip_short_name: Option<String>,
+    /// Indicates when `trip_short_name` should be displayed.
+    /// If multiple of `trip_short_name`, `route_short_name`, `route_long_name` are optional, apps may pick a string purely based on space constraints.
+    /// If left empty, apps may display it.
+    pub trip_short_name_display: Option<DisplayType>,
     /// Indicates the direction of travel for a trip. This field is not used in routing; it provides a way to separate trips by direction when publishing time tables
     pub direction_id: Option<DirectionType>,
     /// Identifies the block to which the trip belongs. A block consists of a single trip or many sequential trips made using the same vehicle, defined by shared service days and block_id. A block_id can have trips with different service days, making distinct blocks
